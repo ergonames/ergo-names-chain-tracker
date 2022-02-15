@@ -1,0 +1,18 @@
+
+{
+    "node": {
+        "nodeApi": {
+            "apiUrl": "http://127.0.0.1:9052/",
+            "apiKey": "testnetapi"
+        },
+        "wallet": {
+            "mnemonic": "kingdom system attend grain rescue want piece convince fame achieve check fold save okay rich",
+            "password": "",
+            "mnemonicPassword": ""
+        },
+        "networkType": "TESTNET"
+    },
+    "parameters": {
+        "addressIndex": 0
+    }
+}
