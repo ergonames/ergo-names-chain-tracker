@@ -3,7 +3,6 @@ package ergonames.Http
 import ergonames.Http.HttpConfig.testnetAPIUrl
 
 import scalaj.http._
-import java.net.http.HttpResponse
 
 object HttpRequest {
 
