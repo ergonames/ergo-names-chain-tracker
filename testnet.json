@@ -2,7 +2,7 @@
 {
     "node": {
         "nodeApi": {
-            "apiUrl": "http://127.0.0.1:9052/",
+            "apiUrl": "http://192.168.1.16:9052/",
             "apiKey": "testnetapi"
         },
         "wallet": {
