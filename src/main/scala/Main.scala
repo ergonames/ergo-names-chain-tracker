@@ -2,7 +2,7 @@ package ergonames
 
 import ergonames.NodeConfiguration.NodeTools._
 import ergonames.NodeConfiguration.NodeWallet.getEIP3ErgoAddress
-import ergonames.Http.HttpRequest.getDataFromDatabase
+import ergonames.Http.HttpRequest._
 
 import org.ergoplatform.appkit._
 import org.ergoplatform.appkit.config.{ErgoToolConfig, ErgoNodeConfig}
@@ -16,7 +16,7 @@ object Main{
   def main(args: Array[String]): Unit = {
     println("Ergo Names Backend\n")
 
-    getDataFromDatabase()
+    getDataFromDatabase("bob.ergo")
   }
 
 }
