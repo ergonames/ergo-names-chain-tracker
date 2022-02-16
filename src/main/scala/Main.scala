@@ -1,22 +1,19 @@
 package ergonames
 
-import ergonames.NodeConfiguration.NodeTools._
-import ergonames.NodeConfiguration.NodeWallet.getEIP3ErgoAddress
-import ergonames.Http.HttpRequest._
-
-import org.ergoplatform.appkit._
-import org.ergoplatform.appkit.config.{ErgoToolConfig, ErgoNodeConfig}
+import ergonames.Database.TokenUtils._
 
 object Main{
-
-  val toolConfig: ErgoToolConfig = createToolConfig("testnet.json")
-  val nodeConfig: ErgoNodeConfig = creatNodeConfig(toolConfig)
-  val client: ErgoClient = createErgoClient(nodeConfig)
 
   def main(args: Array[String]): Unit = {
     println("Ergo Names Backend\n")
 
-    getDataFromDatabase("bob.ergo")
+    val tokenName = "ddfddf"
+    val isRegistered = checkAlreadyRegistered(tokenName)
+    if (isRegistered) {
+      println("Already Registered")
+    } else {
+      println("Not Registered")
+    }
   }
 
 }
