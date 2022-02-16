@@ -15,9 +15,9 @@ object HttpRequest {
         data
     }
 
-    def convertHttpResponseToJSON(response: String): Map[String, String] = {
+    def convertHttpResponseToJSON(response: String): Map[String, Option[String]] = {
         val jsonData = response.parseJson
-        val mappedData = jsonData.convertTo[Map[String, String]]
+        val mappedData = jsonData.convertTo[Map[String, Option[String]]]
         mappedData
     }
 
