@@ -2,6 +2,7 @@ package ergonames.Database
 
 import ergonames.Http.HttpRequest.getDataFromDatabase
 import ergonames.Http.HttpRequest.convertHttpResponseToJSON
+import ergonames.Http.HttpRequest.parseJSONData
 
 object TokenUtils {
 
@@ -17,7 +18,7 @@ object TokenUtils {
     }
 
     def getOwnerAddress(data: Map[String, Option[String]]): String = {
-        val ownerAddress = data.getOrElse("ergo", "Cannot read owner address").toString()
+        val ownerAddress = parseJSONData(data, "ergo", "Cannot read owner address from response.")
         ownerAddress
     }
 }

@@ -21,4 +21,9 @@ object HttpRequest {
         mappedData
     }
 
+    def parseJSONData(response: Map[String, Option[String]], key: String, error: String): String = {
+        val data = response.getOrElse(key, error).toString()
+        data
+    }
+
 }
