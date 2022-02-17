@@ -14,8 +14,7 @@ object BoxScanner {
         val client = createErgoClient(nodeConfig)
         var a = client.execute((ctx: BlockchainContext) => {
             val unspent = ctx.getUnspentBoxesFor(contractAddress, 0, 100)
-            val boxes = BoxOperations.selectTop(unspent, 1000L)
-            boxes
+            unspent
         })
         a
     }
