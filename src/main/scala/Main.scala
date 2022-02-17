@@ -7,7 +7,7 @@ object Main{
   def main(args: Array[String]): Unit = {
     println("Ergo Names Backend\n")
 
-    val tokenName = "bob.ergo"
+    val tokenName = "bob.ergohhyh"
     val isRegistered = checkAlreadyRegistered(tokenName)
     if (isRegistered) {
       println("Already Registered")
