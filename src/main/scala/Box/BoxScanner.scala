@@ -8,7 +8,7 @@ import org.ergoplatform.appkit._
 
 object BoxScanner {
 
-    def scanBoxAtAddress(rawAddress: String, client: ErgoClient): java.util.List[InputBox] = {
+    def scanBoxesAtAddress(rawAddress: String, client: ErgoClient): java.util.List[InputBox] = {
         val contractAddress = createErgoAddress(rawAddress)
         var boxes = client.execute((ctx: BlockchainContext) => {
             val unspent = ctx.getUnspentBoxesFor(contractAddress, 0, 100)

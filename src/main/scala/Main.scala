@@ -11,12 +11,12 @@ object Main{
 
   def main(args: Array[String]): Unit = {
     println("Ergo Names Backend\n")
-    
+
     val toolConfig = createToolConfig("testnet.json")
     val nodeConfig = creatNodeConfig(toolConfig)
     val client = createErgoClient(nodeConfig)
 
-    val boxes = scanBoxAtAddress(contractAddressRaw, client)
+    val boxes = scanBoxesAtAddress(contractAddressRaw, client)
     var a = 0
     for ( a <- 0 to boxes.size() - 1) {
       println(boxes.get(a))
