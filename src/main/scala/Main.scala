@@ -2,7 +2,7 @@ package ergonames
 
 import ergonames.Box.BoxScanner._
 import ergonames.Box.BoxConfig.contractAddressRaw
-import ergonames.Box.BoxUtils.printBoxesAtAddress
+import ergonames.Box.BoxUtils.printBoxesFromList
 import ergonames.NodeConfiguration.NodeTools._
 
 import org.ergoplatform.appkit._
@@ -18,7 +18,7 @@ object Main{
     val client = createErgoClient(nodeConfig)
 
     val boxes = scanBoxesAtAddress(contractAddressRaw, client)
-    printBoxesAtAddress(boxes)
+    printBoxesFromList(boxes)
   }
 
 }
