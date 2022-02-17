@@ -8,7 +8,10 @@ object Main{
     println("Ergo Names Backend\n")
 
     val boxes = scanBox()
-    println(boxes)
+    var a = 0
+    for ( a <- 0 to boxes.size() - 1) {
+      println(boxes.get(a))
+    }
   }
 
 }
