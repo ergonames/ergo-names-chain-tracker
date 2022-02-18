@@ -11,8 +11,8 @@ import org.ergoplatform.appkit.config.{ErgoNodeConfig, ErgoToolConfig}
 object Main{
 
   def main(args: Array[String]): Unit = {
-    println("Ergo Names Backend\n")
-
+    println("Ergo Names Chain Tracker\n")
+    
     val toolConfig = createToolConfig("testnet.json")
     val nodeConfig = creatNodeConfig(toolConfig)
     val client = createErgoClient(nodeConfig)
