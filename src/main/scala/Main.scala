@@ -20,7 +20,6 @@ object Main{
 
     val boxes = scanBoxesAtAddress(contractAddressRaw, client)
     printBoxesFromList(boxes)
-    // val id = getBoxFunderAddress("ceca8efce65ea3b54b4904e15bfb907b4a66d5d347d15b4e3b8b5b1a1fa5945d")
   }
 
 }

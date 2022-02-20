@@ -8,6 +8,12 @@ import DefaultJsonProtocol._
 
 object HttpRequest {
 
+    def getData(url: String): String = {
+        val response = Http(url).asString
+        val body = response.body
+        body
+    }
+
     def getDataFromDatabase(ergoName: String): String = {
         val url: String = testnetAPIUrl + "/ergonames/resolve/" + ergoName
         val response = Http(url).asString
