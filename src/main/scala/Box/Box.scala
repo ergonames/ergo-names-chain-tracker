@@ -3,6 +3,7 @@ package ergonames.Box
 import ergonames.Http.HttpRequest._
 import ergonames.Http.HttpConfig.ergoTestnetAPIUrl
 import ergonames.Utils.StringUtils._
+import ergonames.Box.BoxUtils.parseBoxJson
 
 import scalaj.http._
 import spray.json._
@@ -41,7 +42,7 @@ class Box(iBox: InputBox) {
 
     def setBoxTransactionId() {
         val boxJson = convertStringToJsObject(boxAPIData)
-        val transactionIdRaw = boxJson.getFields("transactionId")(0).toString()
+        val transactionIdRaw = parseBoxJson(boxJson, "transactionId")
         transactionId = removeFirstAndLastCharacter(transactionIdRaw)
     }
 
@@ -53,10 +54,10 @@ class Box(iBox: InputBox) {
         val url: String = ergoTestnetAPIUrl + "/api/v1/transactions/" + transactionId
         val transactionData = getData(url)
         val transactionJson = convertStringToJsObject(transactionData)
-        val inputsData = transactionJson.getFields("inputs")(0).toString()
+        val inputsData = parseBoxJson(transactionJson, "inputs")
         val adjustedInputsData = removeFirstAndLastCharacter(inputsData)
         val addressJson = convertStringToJsObject(adjustedInputsData)
-        val address = addressJson.getFields("address")(0).toString()
+        val address = parseBoxJson(addressJson, "address")
         val adjustedAddress = removeFirstAndLastCharacter(address)
         funderAddress = adjustedAddress
     }
@@ -67,7 +68,7 @@ class Box(iBox: InputBox) {
 
     def setBoxValue() {
         val boxJson = convertStringToJsObject(boxAPIData)
-        val value = boxJson.getFields("value")(0).toString()
+        val value = parseBoxJson(boxJson, "value")
         boxValue = value
     }
 
@@ -77,7 +78,7 @@ class Box(iBox: InputBox) {
 
     def setCreationHeight() {
         val boxJson = convertStringToJsObject(boxAPIData)
-        creationHeight = boxJson.getFields("creationHeight")(0).toString()
+        creationHeight = parseBoxJson(boxJson, "creationHeight")
     }
 
     def getCreationHeight(): String = {
@@ -86,7 +87,7 @@ class Box(iBox: InputBox) {
 
     def setSettlementHeight() {
         val boxJson = convertStringToJsObject(boxAPIData)
-        settlementHeight = boxJson.getFields("settlementHeight")(0).toString()
+        settlementHeight = parseBoxJson(boxJson, "settlementHeight")
     }
 
     def getSettlementHeight(): String = {

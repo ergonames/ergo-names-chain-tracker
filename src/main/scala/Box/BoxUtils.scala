@@ -27,4 +27,9 @@ object BoxUtils {
             println()
         }
     }
+
+    def parseBoxJson(json: JsObject, key: String): String = {
+        val data = json.getFields(key)(0).toString()
+        data
+    }
 }
