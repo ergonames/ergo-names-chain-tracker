@@ -26,20 +26,32 @@ object BoxUtils {
     def getBoxTransactionId(box: InputBox): String = {
         val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + box.getId()
         val boxData = getData(url)
-        val boxAST = boxData.parseJson
-        val boxJson = boxAST.asJsObject
+        val boxJson = convertStringToJsObject(boxData)
         val transactionIdRaw = boxJson.getFields("transactionId")(0).toString()
         val transactionId = removeFirstAndLastCharacter(transactionIdRaw)
         transactionId
     }
 
+    def getBoxValue(box: InputBox): String = {
+        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + box.getId()
+        val boxData = getData(url)
+        val boxJson = convertStringToJsObject(boxData)
+        val value = boxJson.getFields("value")(0).toString()
+        value
+    }
+
     def printBoxesFromList(boxes: java.util.List[InputBox]) {
         var index: Int = 0
         for ( index <- 0 to boxes.size() - 1) {
-            //println(boxes.get(index))
-            println("Box Id:\t\t\t" + boxes.get(index).getId())
-            println("Transaction Id:\t\t" + getBoxTransactionId(boxes.get(index)))
-            println("Funder Address:\t\t" + getBoxFunderAddress(getBoxTransactionId(boxes.get(index))))
+            var boxId = boxes.get(index).getId()
+            var transactionId = getBoxTransactionId(boxes.get(index))
+            var funderAddress = getBoxFunderAddress(transactionId)
+            var boxValue = getBoxValue(boxes.get(index))
+            println("Box Number:\t\t" + index)
+            println("Box Id:\t\t\t" + boxId)
+            println("Transaction Id:\t\t" + transactionId)
+            println("Funder Address:\t\t" + funderAddress)
+            println("Box Value:\t\t" + boxValue)
             println()
         }
     }
