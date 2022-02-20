@@ -18,41 +18,42 @@ class Box(iBox: InputBox) {
     var boxValue: String = ""
     var creationHeight: String = ""
     var settlementHeight: String = ""
+    var boxAPIData: String = ""
 
     def initializeBox() {
         id = iBox.getId().toString()
-        transactionId = setBoxTransactionId()
-        funderAddress = setBoxFunderAddress()
-        boxValue = setBoxValue()
-        creationHeight = setCreationHeight()
-        settlementHeight = setSettlementHeight()
+        setBoxAPIData()
+        setBoxTransactionId()
+        setBoxFunderAddress()
+        setBoxValue()
+        setCreationHeight()
+        setSettlementHeight()
+    }
+
+    def setBoxAPIData() = {
+        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + id
+        boxAPIData = getData(url)        
+    }
+
+    def getBoxAPIData(): String = {
+        boxAPIData
     }
 
     def getId(): String = {
         id
     }
 
+    def setBoxTransactionId() {
+        val boxJson = convertStringToJsObject(boxAPIData)
+        val transactionIdRaw = boxJson.getFields("transactionId")(0).toString()
+        transactionId = removeFirstAndLastCharacter(transactionIdRaw)
+    }
+
     def getTransactionId(): String = {
         transactionId
     }
 
-    def getFunderAddress(): String = {
-        funderAddress
-    }
-
-    def getValue(): String = {
-        boxValue
-    }
-
-    def getCreationHeight(): String = {
-        creationHeight
-    }
-
-    def getSettlementHeight(): String = {
-        settlementHeight
-    }
-
-    def setBoxFunderAddress(): String = {
+    def setBoxFunderAddress() {
         val url: String = ergoTestnetAPIUrl + "/api/v1/transactions/" + transactionId
         val transactionData = getData(url)
         val transactionJson = convertStringToJsObject(transactionData)
@@ -61,39 +62,38 @@ class Box(iBox: InputBox) {
         val addressJson = convertStringToJsObject(adjustedInputsData)
         val address = addressJson.getFields("address")(0).toString()
         val adjustedAddress = removeFirstAndLastCharacter(address)
-        adjustedAddress
+        funderAddress = adjustedAddress
     }
 
-    def setBoxTransactionId(): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + id
-        val boxData = getData(url)
-        val boxJson = convertStringToJsObject(boxData)
-        val transactionIdRaw = boxJson.getFields("transactionId")(0).toString()
-        val transactionId = removeFirstAndLastCharacter(transactionIdRaw)
-        transactionId
+    def getFunderAddress(): String = {
+        funderAddress
     }
 
-    def setBoxValue(): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + id
-        val boxData = getData(url)
-        val boxJson = convertStringToJsObject(boxData)
+    def setBoxValue() {
+        val boxJson = convertStringToJsObject(boxAPIData)
         val value = boxJson.getFields("value")(0).toString()
-        value
+        boxValue = value
     }
 
-    def setCreationHeight(): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + id
-        val boxData = getData(url)
-        val boxJson = convertStringToJsObject(boxData)
-        val creationHeight = boxJson.getFields("creationHeight")(0).toString()
+    def getValue(): String = {
+        boxValue
+    }
+
+    def setCreationHeight() {
+        val boxJson = convertStringToJsObject(boxAPIData)
+        creationHeight = boxJson.getFields("creationHeight")(0).toString()
+    }
+
+    def getCreationHeight(): String = {
         creationHeight
     }
 
-    def setSettlementHeight(): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + id
-        val boxData = getData(url)
-        val boxJson = convertStringToJsObject(boxData)
-        val settlementHeight = boxJson.getFields("settlementHeight")(0).toString()
+    def setSettlementHeight() {
+        val boxJson = convertStringToJsObject(boxAPIData)
+        settlementHeight = boxJson.getFields("settlementHeight")(0).toString()
+    }
+
+    def getSettlementHeight(): String = {
         settlementHeight
     }
 
