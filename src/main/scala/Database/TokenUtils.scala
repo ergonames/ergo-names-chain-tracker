@@ -1,13 +1,13 @@
 package ergonames.Database
 
-import ergonames.Http.HttpRequest.getDataFromDatabase
+import ergonames.Http.HttpRequest.getData
 import ergonames.Http.HttpRequest.convertHttpResponseToJSON
 import ergonames.Http.HttpRequest.parseJSONData
 
 object TokenUtils {
 
     def checkAlreadyRegistered(tokenName: String): Boolean = {
-        val response = getDataFromDatabase(tokenName)
+        val response = getData(tokenName)
         val jsonData = convertHttpResponseToJSON(response)
         val ownerAddress = getOwnerAddress(jsonData)
         if (ownerAddress == "None") {

@@ -2,7 +2,7 @@ package ergonames.Http
 
 object HttpConfig {
 
-    val mainnetAPIUrl: String = "api.ergonames.com"
+    val mainnetAPIUrl: String = "https://api.ergonames.com"
     val testnetAPIUrl: String = "https://testnet-api.ergonames.com"
 
     val ergoMainnetAPIUrl: String = "https://api.ergoplatform.com"
