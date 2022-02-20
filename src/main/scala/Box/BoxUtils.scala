@@ -11,67 +11,18 @@ import DefaultJsonProtocol._
 
 object BoxUtils {
 
-    def getBoxFunderAddress(transactionId: String): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/transactions/" + transactionId
-        val transactionData = getData(url)
-        val transactionJson = convertStringToJsObject(transactionData)
-        val inputsData = transactionJson.getFields("inputs")(0).toString()
-        val adjustedInputsData = removeFirstAndLastCharacter(inputsData)
-        val addressJson = convertStringToJsObject(adjustedInputsData)
-        val address = addressJson.getFields("address")(0).toString()
-        val adjustedAddress = removeFirstAndLastCharacter(address)
-        adjustedAddress
-    }
-
-    def getBoxTransactionId(box: InputBox): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + box.getId()
-        val boxData = getData(url)
-        val boxJson = convertStringToJsObject(boxData)
-        val transactionIdRaw = boxJson.getFields("transactionId")(0).toString()
-        val transactionId = removeFirstAndLastCharacter(transactionIdRaw)
-        transactionId
-    }
-
-    def getBoxValue(box: InputBox): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + box.getId()
-        val boxData = getData(url)
-        val boxJson = convertStringToJsObject(boxData)
-        val value = boxJson.getFields("value")(0).toString()
-        value
-    }
-
-    def getCreationHeight(box: InputBox): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + box.getId()
-        val boxData = getData(url)
-        val boxJson = convertStringToJsObject(boxData)
-        val creationHeight = boxJson.getFields("creationHeight")(0).toString()
-        creationHeight
-    }
-
-    def getSettlementHeight(box: InputBox): String = {
-        val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + box.getId()
-        val boxData = getData(url)
-        val boxJson = convertStringToJsObject(boxData)
-        val settlementHeight = boxJson.getFields("settlementHeight")(0).toString()
-        settlementHeight
-    }
-
-    def printBoxesFromList(boxes: java.util.List[InputBox]) {
+    def printBoxesFromList(boxesList: java.util.List[InputBox]) {
         var index: Int = 0
-        for ( index <- 0 to boxes.size() - 1) {
-            var boxId = boxes.get(index).getId()
-            var transactionId = getBoxTransactionId(boxes.get(index))
-            var funderAddress = getBoxFunderAddress(transactionId)
-            var boxValue = getBoxValue(boxes.get(index))
-            var creationHeight = getCreationHeight(boxes.get(index))
-            var settlementHeight = getSettlementHeight(boxes.get(index))
+        for ( index <- 0 to boxesList.size() - 1) {
+            var box = new Box(boxesList.get(index))
+            box.initializeBox()
             println("Box Number:\t\t" + index)
-            println("Box Id:\t\t\t" + boxId)
-            println("Transaction Id:\t\t" + transactionId)
-            println("Funder Address:\t\t" + funderAddress)
-            println("Box Value:\t\t" + boxValue)
-            println("Creation Height:\t" + creationHeight)
-            println("Settlement Height:\t" + settlementHeight)
+            println("Box Id:\t\t\t" + box.getId())
+            println("Transaction Id:\t\t" + box.getTransactionId())
+            println("Funder Address:\t\t" + box.getFunderAddress())
+            println("Box Value:\t\t" + box.getValue())
+            println("Creation Height:\t" + box.getCreationHeight())
+            println("Settlement Height:\t" + box.getSettlementHeight())
             println()
         }
     }

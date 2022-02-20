@@ -18,7 +18,7 @@ object Main{
     val nodeConfig = creatNodeConfig(toolConfig)
     val client = createErgoClient(nodeConfig)
 
-    val boxes = scanBoxesAtAddress(contractAddressRaw, client)
+    var boxes = scanBoxesAtAddress(contractAddressRaw, client)
     printBoxesFromList(boxes)
   }
 
