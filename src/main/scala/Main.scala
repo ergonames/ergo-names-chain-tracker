@@ -16,14 +16,12 @@ import scala.collection.mutable.ListBuffer
 object Main{
 
   def main(args: Array[String]): Unit = {
-    clearScreen()
-    systemHeader()
-    println("Chain Height: " + getChainHeight().toString())
-    println()
-    
     val toolConfig = createToolConfig("testnet.json")
     val nodeConfig = creatNodeConfig(toolConfig)
     val client = createErgoClient(nodeConfig)
+
+    clearScreen()
+    systemHeader(nodeConfig)
 
     var onChainBoxes = scanBoxesAtAddress(contractAddressRaw, client)
     

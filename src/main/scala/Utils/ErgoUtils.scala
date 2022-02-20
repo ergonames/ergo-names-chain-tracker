@@ -4,6 +4,9 @@ import ergonames.Http.HttpConfig.ergoTestnetAPIUrl
 import ergonames.Http.HttpRequest._
 import ergonames.Utils.StringUtils._
 
+import org.ergoplatform.appkit.NetworkType
+import org.ergoplatform.appkit.config.ErgoNodeConfig
+
 object ErgoUtils {
 
     def getChainHeight(): Int = {
@@ -12,5 +15,9 @@ object ErgoUtils {
         val networkStateJson = convertStringToJsObject(response)
         val chainHeightData = networkStateJson.getFields("height")(0).toString()
         chainHeightData.toInt
+    }
+
+    def getChainType(nodeConfig: ErgoNodeConfig): NetworkType = {
+        nodeConfig.getNetworkType()
     }
 }
