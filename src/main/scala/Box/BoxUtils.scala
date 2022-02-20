@@ -12,17 +12,16 @@ object BoxUtils {
     def getBoxFunderAddress(transactionId: String): String = {
         val url: String = ergoTestnetAPIUrl + "/api/v1/transactions/" + transactionId
         val response = Http(url).asString
-        val boxData = response.body
-        val boxAST = boxData.parseJson
-        val boxJson = boxAST.asJsObject
-        val transactionInputs = boxJson.getFields("inputs")
-        val txInputsString = transactionInputs.toString()
-        val txInputsJson = txInputsString.parseJson
-        val txInputsAST = txInputsJson.asJsObject
-        val address = txInputsAST.getFields("address")
-        println(address(0))
-        val funderAddress = "ss"
-        funderAddress
+        val transactionData = response.body
+        val transactionAST = transactionData.parseJson
+        val transactionJson = transactionAST.asJsObject
+        val inputsData = transactionJson.getFields("inputs")(0).toString()
+        val adjustedInputsData = inputsData.substring(1, inputsData.length()-1)
+        val addressAST = adjustedInputsData.parseJson
+        val addressJson = addressAST.asJsObject
+        val address = addressJson.getFields("address")(0).toString()
+        val adjustedAddress = address.substring(1, address.length()-1)
+        adjustedAddress
     }
 
     def getBoxTransactionId(box: InputBox): String = {
@@ -42,7 +41,7 @@ object BoxUtils {
             //println(boxes.get(index))
             println("Box Id:\t\t\t" + boxes.get(index).getId())
             println("Transaction Id:\t\t" + getBoxTransactionId(boxes.get(index)))
-            println("Funder Address:\t\t" + getBoxFunderAddress(getBoxFunderAddress(getBoxTransactionId(boxes.get(index)))))
+            println("Funder Address:\t\t" + getBoxFunderAddress(getBoxTransactionId(boxes.get(index))))
             println()
         }
     }
