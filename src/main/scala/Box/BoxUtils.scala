@@ -32,4 +32,13 @@ object BoxUtils {
         val data = json.getFields(key)(0).toString()
         data
     }
+
+    def getTotalBoxesValue(boxesList: ListBuffer[Box]): Int = {
+        var value = 0
+        var index = 0
+        for ( index <- 0 to boxesList.length - 1) {
+            value += boxesList(index).getValue().toInt
+        }
+        value
+    }
 }

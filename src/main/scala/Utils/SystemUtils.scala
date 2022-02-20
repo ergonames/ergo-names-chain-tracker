@@ -18,4 +18,9 @@ object SystemUtils {
         println()
     }
 
+    def millisecondsToSeconds(milliseconds: Int): Int = {
+        val seconds: Int = milliseconds * 1000
+        seconds
+    }
+
 }

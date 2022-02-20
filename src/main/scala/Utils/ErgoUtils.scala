@@ -20,4 +20,14 @@ object ErgoUtils {
     def getChainType(nodeConfig: ErgoNodeConfig): NetworkType = {
         nodeConfig.getNetworkType()
     }
+
+    def nanoErgToErg(nanoErg: Int): Int = {
+        val erg = nanoErg / 1e9
+        erg.toInt
+    }
+
+    def ergToNanoErg(erg: Int): Int = {
+        val nanoErg = erg * 1e9
+        nanoErg.toInt
+    }
 }
