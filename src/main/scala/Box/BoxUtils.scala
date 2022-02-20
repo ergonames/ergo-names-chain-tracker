@@ -8,13 +8,14 @@ import scalaj.http._
 import org.ergoplatform.appkit.InputBox
 import spray.json._
 import DefaultJsonProtocol._
+import scala.collection.mutable.ListBuffer
 
 object BoxUtils {
 
-    def printBoxesFromList(boxesList: java.util.List[InputBox]) {
+    def printBoxesFromList(boxesList: ListBuffer[Box]) {
         var index: Int = 0
-        for ( index <- 0 to boxesList.size() - 1) {
-            var box = new Box(boxesList.get(index))
+        for ( index <- 0 to boxesList.length - 1) {
+            var box = boxesList(index)
             box.initializeBox()
             println("Box Number:\t\t" + index)
             println("Box Id:\t\t\t" + box.getId())

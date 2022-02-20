@@ -18,7 +18,7 @@ class Box(iBox: InputBox) {
     var boxValue: String = ""
     var creationHeight: String = ""
     var settlementHeight: String = ""
-    var boxAPIData: String = ""
+    private var boxAPIData: String = ""
 
     def initializeBox() {
         id = iBox.getId().toString()
@@ -30,13 +30,9 @@ class Box(iBox: InputBox) {
         setSettlementHeight()
     }
 
-    def setBoxAPIData() = {
+    private def setBoxAPIData() = {
         val url: String = ergoTestnetAPIUrl + "/api/v1/boxes/" + id
         boxAPIData = getData(url)        
-    }
-
-    def getBoxAPIData(): String = {
-        boxAPIData
     }
 
     def getId(): String = {
