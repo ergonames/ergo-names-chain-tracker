@@ -6,6 +6,7 @@ import ergonames.Box.BoxConfig.contractAddressRaw
 import ergonames.Box.BoxUtils.printBoxesFromList
 import ergonames.NodeConfiguration.NodeTools._
 import ergonames.Utils.SystemUtils._
+import ergonames.Utils.ErgoUtils._
 
 import org.ergoplatform.appkit._
 import org.ergoplatform.appkit.config.{ErgoNodeConfig, ErgoToolConfig}
@@ -17,6 +18,8 @@ object Main{
   def main(args: Array[String]): Unit = {
     clearScreen()
     systemHeader()
+    println("Chain Height: " + getChainHeight().toString())
+    println()
     
     val toolConfig = createToolConfig("testnet.json")
     val nodeConfig = creatNodeConfig(toolConfig)
