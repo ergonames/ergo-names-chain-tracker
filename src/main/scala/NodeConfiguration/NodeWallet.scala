@@ -1,6 +1,6 @@
 package ergonames.NodeConfiguration
 
-import ergonames.SystemUtils.StringUtils.convertToSecretString
+import ergonames.Utils.StringUtils.convertToSecretString
 
 import org.ergoplatform.appkit.{Address, Mnemonic, NetworkType, SecretString}
 import org.ergoplatform.appkit.config.ErgoNodeConfig

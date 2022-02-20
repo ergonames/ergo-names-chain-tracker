@@ -1,4 +1,4 @@
-package ergonames.SystemUtils
+package ergonames.Utils
 
 import org.ergoplatform.appkit.SecretString
 import spray.json._

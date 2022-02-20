@@ -2,7 +2,7 @@ package ergonames.Box
 
 import ergonames.Http.HttpRequest._
 import ergonames.Http.HttpConfig.ergoTestnetAPIUrl
-import ergonames.SystemUtils.StringUtils._
+import ergonames.Utils.StringUtils._
 
 import scalaj.http._
 import spray.json._
