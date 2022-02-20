@@ -5,6 +5,7 @@ import ergonames.Box.BoxUtils._
 import ergonames.Box.BoxConfig.contractAddressRaw
 import ergonames.Box.BoxUtils.printBoxesFromList
 import ergonames.NodeConfiguration.NodeTools._
+import ergonames.Utils.SystemUtils._
 
 import org.ergoplatform.appkit._
 import org.ergoplatform.appkit.config.{ErgoNodeConfig, ErgoToolConfig}
@@ -14,7 +15,8 @@ import scala.collection.mutable.ListBuffer
 object Main{
 
   def main(args: Array[String]): Unit = {
-    println("Ergo Names Chain Tracker\n")
+    clearScreen()
+    systemHeader()
     
     val toolConfig = createToolConfig("testnet.json")
     val nodeConfig = creatNodeConfig(toolConfig)
