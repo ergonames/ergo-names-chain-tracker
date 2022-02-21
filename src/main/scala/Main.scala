@@ -8,6 +8,7 @@ import ergonames.NodeConfiguration.NodeTools._
 import ergonames.Utils.SystemUtils._
 import ergonames.Utils.ErgoUtils._
 import ergonames.System.Loop.loop
+import ergonames.Http.HttpRequest._
 
 import org.ergoplatform.appkit._
 import org.ergoplatform.appkit.config.{ErgoNodeConfig, ErgoToolConfig}
@@ -21,6 +22,8 @@ object Main{
     val nodeConfig = creatNodeConfig(toolConfig)
     val client = createErgoClient(nodeConfig)
 
+    val networkType = getChainType(nodeConfig)
+
     var onChainBoxes = scanBoxesAtAddress(contractAddressRaw, client)
     var boxesList: ListBuffer[Box.Box] = new ListBuffer[Box.Box]()
     
@@ -31,7 +34,7 @@ object Main{
       boxesList.append(box)
     }
 
-    loop(nodeConfig, client, boxesList)
+    loop(nodeConfig, client, boxesList, networkType)
 
   }
 

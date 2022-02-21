@@ -1,10 +1,11 @@
 package ergonames.Http
 
-import ergonames.Http.HttpConfig.testnetAPIUrl
+import ergonames.Http.HttpConfig._
 
 import scalaj.http._
 import spray.json._
 import DefaultJsonProtocol._
+import org.ergoplatform.appkit.NetworkType
 
 object HttpRequest {
 

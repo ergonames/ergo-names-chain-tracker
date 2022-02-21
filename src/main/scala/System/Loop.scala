@@ -13,14 +13,15 @@ import ergonames.Utils.ErgoUtils._
 import org.ergoplatform.appkit.ErgoClient
 import org.ergoplatform.appkit.config.ErgoNodeConfig
 import scala.collection.mutable.ListBuffer
+import org.ergoplatform.appkit.NetworkType
 
 object Loop {
 
-    def loop(nodeConfig: ErgoNodeConfig ,client: ErgoClient, boxesList: ListBuffer[Box]) {
+    def loop(nodeConfig: ErgoNodeConfig ,client: ErgoClient, boxesList: ListBuffer[Box], networkType: NetworkType) {
         val systemOn = true
         while (systemOn) {
             clearScreen()
-            systemHeader(nodeConfig)
+            systemHeader(nodeConfig, networkType)
 
             var totalValueInBoxes = getTotalBoxesValue(boxesList)
             println("Total Boxes At Address:\t\t\t" + boxesList.size.toString())
